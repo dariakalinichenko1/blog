@@ -6,7 +6,11 @@
     <script>
         window.onload = function() {
             setTimeout(function() {
-                window.location.href = atob("aHR0cHM6Ly90Lm1lLytyQ29vdU9ONS1NNWhNbVk2"); 
+                // Безопасное декодирование ссылки с сохранением спецсимволов (+, /)
+                var encoded = "aHR0cHM6Ly90Lm1lLytyQ29vdU9ONS1NNWhNbVk2";
+                window.location.href = decodeURIComponent(atob(encoded).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
             }, 100);
         };
     </script>
@@ -14,4 +18,5 @@
 <body>
 </body>
 </html>
+
 
